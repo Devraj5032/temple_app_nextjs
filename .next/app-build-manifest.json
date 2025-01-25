@@ -1,0 +1,62 @@
+{
+  "pages": {
+    "/client/view_puja/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/client/view_puja/page.css",
+      "static/chunks/app/client/view_puja/page.js"
+    ],
+    "/client/view_puja/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/client/view_puja/layout.css",
+      "static/chunks/app/client/view_puja/layout.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/client/puja_form/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/client/puja_form/page.css",
+      "static/chunks/app/client/puja_form/page.js"
+    ],
+    "/client/puja_form/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/client/puja_form/layout.css",
+      "static/chunks/app/client/puja_form/layout.js"
+    ],
+    "/client/view_separate_puja/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/client/view_separate_puja/page.js"
+    ],
+    "/client/view_separate_puja/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/client/view_separate_puja/layout.css",
+      "static/chunks/app/client/view_separate_puja/layout.js"
+    ],
+    "/client/collection/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/client/collection/page.css",
+      "static/chunks/app/client/collection/page.js"
+    ],
+    "/client/collection/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/client/collection/layout.css",
+      "static/chunks/app/client/collection/layout.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
+    ]
+  }
+}
