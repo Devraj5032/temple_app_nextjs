@@ -1,9 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/server/get_pujas/route": "app/server/get_pujas/route.js",
+  "/server/collection/bookingByRange/route": "app/server/collection/bookingByRange/route.js",
   "/server/collection/collectionByRange/route": "app/server/collection/collectionByRange/route.js",
-  "/client/view_puja/page": "app/client/view_puja/page.js",
-  "/client/puja_form/page": "app/client/puja_form/page.js",
-  "/client/view_separate_puja/page": "app/client/view_separate_puja/page.js",
+  "/server/get_pujas/route": "app/server/get_pujas/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/client/collection/page": "app/client/collection/page.js"
 }

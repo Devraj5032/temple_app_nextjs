@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   Box,
   Container,
@@ -23,118 +23,123 @@ import {
   useColorModeValue,
   Divider,
   HStack,
-} from "@chakra-ui/react"
-import { ChevronRightIcon, CalendarIcon, SunIcon, InfoIcon } from "@chakra-ui/icons"
+} from "@chakra-ui/react";
+import {
+  ChevronRightIcon,
+  CalendarIcon,
+  SunIcon,
+  InfoIcon,
+} from "@chakra-ui/icons";
 
 interface Puja {
-  id: string
-  name: string
+  id: string;
+  name: string;
 }
 
 interface FamilyMember {
-  name: string
-  nakshatram_name_english: string
-  nakshatram_name_hindi: string
-  nakshatram_name_tamil: string
-  gotram_name_english: string
-  gotram_name_hindi: string
-  gotram_name_tamil: string
-  rashi_name_english: string
-  rashi_name_hindi: string
-  rashi_name_tamil: string
+  name: string;
+  nakshatram_name_english: string;
+  nakshatram_name_hindi: string;
+  nakshatram_name_tamil: string;
+  gotram_name_english: string;
+  gotram_name_hindi: string;
+  gotram_name_tamil: string;
+  rashi_name_english: string;
+  rashi_name_hindi: string;
+  rashi_name_tamil: string;
 }
 
 interface PujaBooking {
-  puja_id: number
-  booking_id: number
-  date: string
-  day: string
-  remarks: string | null
-  family_data: FamilyMember[]
+  puja_id: number;
+  booking_id: number;
+  date: string;
+  day: string;
+  remarks: string | null;
+  family_data: FamilyMember[];
 }
 
 export default function PujaList() {
-  const [pujas, setPujas] = React.useState<Puja[]>([])
-  const [selectedPuja, setSelectedPuja] = React.useState<string>("")
-  const [results, setResults] = React.useState<PujaBooking[]>([])
-  const [currentPujaIndex, setCurrentPujaIndex] = React.useState(0)
-  const toast = useToast()
+  const [pujas, setPujas] = React.useState<Puja[]>([]);
+  const [selectedPuja, setSelectedPuja] = React.useState<string>("");
+  const [results, setResults] = React.useState<PujaBooking[]>([]);
+  const [currentPujaIndex, setCurrentPujaIndex] = React.useState(0);
+  const toast = useToast();
 
-  const bgColor = useColorModeValue("white", "gray.800")
-  const borderColor = useColorModeValue("gray.200", "gray.700")
-  const headingColor = useColorModeValue("blue.600", "blue.300")
+  const bgColor = useColorModeValue("white", "gray.800");
+  const borderColor = useColorModeValue("gray.200", "gray.700");
+  const headingColor = useColorModeValue("blue.600", "blue.300");
 
   React.useEffect(() => {
-    fetchPujas()
-  }, [])
+    fetchPujas();
+  }, []);
 
   const fetchPujas = async () => {
     try {
-      const response = await fetch("/server/get_pujas")
-      if (!response.ok) throw new Error("Failed to fetch pujas")
+      const response = await fetch("/server/get_pujas");
+      if (!response.ok) throw new Error("Failed to fetch pujas");
 
-      const data = await response.json()
-      setPujas([{ id: "", name: "All Pujas" }, ...data])
+      const data = await response.json();
+      setPujas([{ id: "", name: "All Pujas" }, ...data]);
     } catch (error) {
-      console.error("Error fetching pujas:", error)
+      console.error("Error fetching pujas:", error);
       toast({
         title: "Error",
         description: "Failed to load pujas. Please try again later.",
         status: "error",
         duration: 5000,
         isClosable: true,
-      })
+      });
     }
-  }
+  };
 
   const fetchResults = async (pujaId: string) => {
     try {
-      const queryParam = pujaId ? `?puja_id=${pujaId}` : ""
-      const response = await fetch(`/server/getPujaForDay${queryParam}`)
+      const queryParam = pujaId ? `?puja_id=${pujaId}` : "";
+      const response = await fetch(`/server/getPujaForDay${queryParam}`);
 
-      if (!response.ok) throw new Error("Failed to fetch results")
+      if (!response.ok) throw new Error("Failed to fetch results");
 
-      const { success, data } = await response.json()
+      const { success, data } = await response.json();
       if (success) {
-        setResults(data)
-        setCurrentPujaIndex(0) // Reset to first puja when new results are loaded
+        setResults(data);
+        setCurrentPujaIndex(0); // Reset to first puja when new results are loaded
       }
     } catch (error) {
-      console.error("Error fetching results:", error)
+      console.error("Error fetching results:", error);
       toast({
         title: "Error",
         description: "Failed to load results. Please try again later.",
         status: "error",
         duration: 5000,
         isClosable: true,
-      })
+      });
     }
-  }
+  };
 
   const handlePujaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value
-    setSelectedPuja(value)
-    fetchResults(value)
-  }
+    const value = event.target.value;
+    setSelectedPuja(value);
+    fetchResults(value);
+  };
 
   const handleNextPuja = () => {
     if (currentPujaIndex < results.length - 1) {
-      setCurrentPujaIndex((prev) => prev + 1)
+      setCurrentPujaIndex((prev) => prev + 1);
     }
-  }
+  };
 
-  const currentPuja = results[currentPujaIndex]
-  const totalPujas = results.length
-  const isLastPuja = currentPujaIndex === results.length - 1
+  const currentPuja = results[currentPujaIndex];
+  const totalPujas = results.length;
+  const isLastPuja = currentPujaIndex === results.length - 1;
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
+    const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
-    })
-  }
+    });
+  };
 
   return (
     <Container maxW="container.xl" py={8}>
@@ -177,7 +182,7 @@ export default function PujaList() {
               <CardBody>
                 <VStack align="stretch" spacing={4}>
                   <Heading size="lg" color={headingColor} textAlign="center">
-                    {pujas.find((p) => p.id === currentPuja.puja_id.toString())?.name || "Puja"}
+                    {currentPuja.puja_name}
                   </Heading>
                   <Divider />
                   <HStack spacing={4} justify="center">
@@ -194,6 +199,11 @@ export default function PujaList() {
                       </HStack>
                     </Badge>
                   </HStack>
+                  <Box display={"flex"} gap={2}>
+                  <HStack>
+                    <InfoIcon color="red.500" />
+                    <Text>Booking id: {currentPuja.booking_id}</Text>
+                  </HStack>
                   {currentPuja.remarks && (
                     <Box bg="yellow.100" p={3} borderRadius="md">
                       <HStack>
@@ -202,6 +212,7 @@ export default function PujaList() {
                       </HStack>
                     </Box>
                   )}
+                  </Box>
                   <Table variant="simple" colorScheme="blue">
                     <Thead>
                       <Tr>
@@ -219,7 +230,8 @@ export default function PujaList() {
                             <VStack align="start" spacing={0}>
                               <Text>{member.nakshatram_name_english}</Text>
                               <Text fontSize="xs" color="gray.500">
-                                {member.nakshatram_name_hindi} / {member.nakshatram_name_tamil}
+                                {member.nakshatram_name_hindi} /{" "}
+                                {member.nakshatram_name_tamil}
                               </Text>
                             </VStack>
                           </Td>
@@ -227,7 +239,8 @@ export default function PujaList() {
                             <VStack align="start" spacing={0}>
                               <Text>{member.gotram_name_english}</Text>
                               <Text fontSize="xs" color="gray.500">
-                                {member.gotram_name_hindi} / {member.gotram_name_tamil}
+                                {member.gotram_name_hindi} /{" "}
+                                {member.gotram_name_tamil}
                               </Text>
                             </VStack>
                           </Td>
@@ -235,7 +248,8 @@ export default function PujaList() {
                             <VStack align="start" spacing={0}>
                               <Text>{member.rashi_name_english}</Text>
                               <Text fontSize="xs" color="gray.500">
-                                {member.rashi_name_hindi} / {member.rashi_name_tamil}
+                                {member.rashi_name_hindi} /{" "}
+                                {member.rashi_name_tamil}
                               </Text>
                             </VStack>
                           </Td>
@@ -258,6 +272,5 @@ export default function PujaList() {
         )}
       </VStack>
     </Container>
-  )
+  );
 }
-

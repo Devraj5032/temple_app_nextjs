@@ -22,10 +22,10 @@ export default function RootLayout({
               borderBottom="2px solid" 
               borderColor="gray.300" // Customize color as needed
             >
-              <Box flexShrink={0} mr={8}>
+              <Box flexShrink={0} mr={2}>
                 {/* Placeholder for logo */}
-                <Box w="50px" h="50px" bg="gray.200" display="flex" alignItems="center" justifyContent="center">
-                  <Text fontSize="xs">Logo</Text>
+                <Box w="20px" h="20px" bg="gray.200" display="flex" alignItems="center" justifyContent="center">
+                  <Text fontSize="xs">L</Text>
                 </Box>
               </Box>
               <VStack spacing={1} align="center" flex="1">

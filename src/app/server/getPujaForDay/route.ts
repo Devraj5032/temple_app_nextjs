@@ -18,6 +18,7 @@ export async function GET(request) {
             const query = `
                 SELECT 
                     bd.puja_id, 
+                    p.name AS puja_name, 
                     bd.booking_id, 
                     bd.date, 
                     bd.day, 
@@ -41,6 +42,7 @@ export async function GET(request) {
                 JOIN nakshatram AS n ON fm.nakshatram = n.id
                 JOIN gotram AS g ON fm.gotram = g.id
                 JOIN rashi AS r ON fm.rashi = r.id
+                JOIN pujas AS p ON bd.puja_id = p.id
                 WHERE DATE(bd.date) = ?
                 ${pujaId ? "AND bd.puja_id = ?" : ""}
                 ORDER BY bd.puja_id, bd.booking_id;
@@ -53,6 +55,7 @@ export async function GET(request) {
             const groupedData = rows.reduce((acc, row) => {
                 const {
                     puja_id,
+                    puja_name,
                     booking_id,
                     date,
                     day,
@@ -76,6 +79,7 @@ export async function GET(request) {
                 if (!acc[bookingKey]) {
                     acc[bookingKey] = {
                         puja_id,
+                        puja_name,
                         booking_id,
                         date,
                         day,
